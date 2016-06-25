@@ -1,0 +1,85 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href="/stylesheets/style.css" rel="stylesheet" type="text/css"  media="all" />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link href="/stylesheets/login-form-elements.css" rel="stylesheet" type="text/css"/>
+    <link href="/stylesheets/login-style.css" rel="stylesheet" type="text/css"/>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <title>New Story | Leave The Marks</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link href='http://fonts.googleapis.com/css?family=Carrois+Gothic+SC' rel='stylesheet' type='text/css'>
+</head>
+<body>
+<!-- Start-wrap -->
+
+<!-- Start-Header-->
+<% include elements/header.ejs %>
+
+<div class="top-content">
+
+    <div class="inner-bg">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-sm-12">
+
+                    <div class="form-box">
+                        <div class="form-top">
+                            <div class="form-top-left">
+                                <h3>New Story</h3>
+                                <p>Create a new story from here:</p>
+                            </div>
+                            <div class="form-top-right">
+                                <i class="fa fa-pencil"></i>
+                            </div>
+                        </div>
+                        <div class="form-bottom">
+                            <form action="/new-story" method="post" enctype="multipart/form-data" role="form" class="story-form">
+                                <div class="form-group">
+                                    <label class="sr-only" for="title">Story Title</label>
+                                    <input type="text" name="story_title" placeholder="Story title..." class="title form-control" id="title">
+                                </div>
+                                <div class="form-group">
+                                    <label class="sr-only" for="image">Image</label>
+                                    <input type="file" name="story_image" class="image" id="image">
+                                </div>
+                                <div class="form-group">
+                                    <label class="sr-only" for="story">Story</label>
+				                    <textarea name="story" placeholder="Story..." class="story form-control" id="story"></textarea>
+                                </div>
+                                <input type="submit" class="btn" value="Crate Story!" />
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<div class="clear"> </div>
+
+<!--Footer-->
+<% include elements/footer.ejs %>
+
+<!-- End-wrap -->
+
+</body>
+</html>
+

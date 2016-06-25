@@ -1,0 +1,74 @@
+
+<% var TITLE = "Home | Leave The Marks"; %>
+
+<% include elements/body.ejs %>
+
+<!-- Start-Header-->
+<% include elements/header.ejs %>
+
+<div class="wrap">
+    <div class="sidebar">
+
+        <% include elements/right-sidebar.ejs %>
+
+        <div class="bloder-content">
+            <% for(var i = 0; i < stories.length; i++) {
+                var style = "";
+                if (i == (stories.length - 1)) {
+                    style = 'style=border-bottom:none;';
+                }
+            %>
+            <div <%= style %> class="bloger-grid">
+                <div class="blog-img">
+                    <%- img_tag(stories[i].image, {title: stories[i].title}) %>
+                </div>
+                <div class="bloger-content">
+                    <h5>
+                        <%- link_to(stories[i].title, '/detail/' + stories[i].title) %>
+                    </h5>
+                    <%
+                        var formatted_date = stories[i].updated;
+                        formatted_date = formatted_date.toISOString().substring(0, 19);
+                    %>
+                    <span class="update-date">
+                        <%- link_to("Last Updated: " + formatted_date, 'javascript:void(0);') %>
+                    </span>
+
+                    <p><%= stories[i].story.substring(0, 300) %></p>
+                    <ul>
+                        <li>
+                            <a href="/detail/<%=stories[i].title%>">
+                                <button class="btn btn-primary" type="button">Read More</button>
+                            </a>
+                        </li>
+                        <% if(typeof user != "undefined" && user == stories[i].author){ %>
+                        <li>
+                            <a href="/delete-story?id=<%=stories[i]._id%>">
+                                <button class="btn btn-danger" type="button">Delete</button>
+                            </a>
+                        </li>
+                        <% } %>
+                    </ul>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <% } %>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+
+<div class="clear"></div>
+
+<% include elements/pagination.ejs %>
+
+<div class="clear"></div>
+
+<!--Footer-->
+<% include elements/footer.ejs %>
+
+<!-- End-wrap -->
+
+</body>
+</html>
+

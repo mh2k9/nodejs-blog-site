@@ -1,0 +1,147 @@
+
+<% var TITLE = story.title + " | Leave The Marks"; %>
+
+<% include elements/body.ejs %>
+
+<!-- Start-Header-->
+<% include elements/header.ejs %>
+
+<div class="wrap">
+    <div class="sidebar">
+
+        <% include elements/right-sidebar.ejs %>
+
+        <!--Content-->
+        <div class="bloder-content">
+            <div class="bloger-grid" style="border-bottom: none;">
+                <div class="story-title">
+                    <h1>
+                        <%- link_to(story.title, '/detail/' + story.title) %>
+                    </h1>
+                    <%
+                    var formatted_date = story.updated;
+                    formatted_date = formatted_date.toISOString().substring(0, 19);
+                    %>
+
+                    <span class="update-date">
+                        <%- link_to("Last Updated: " + formatted_date, 'javascript:void(0);') %>
+                    </span>
+                </div>
+                <div style="border-bottom:none;" class="detail-content">
+                    <%- img_tag(story.image, {title: story.title}) %>
+                    <div class="desc">
+                        <p>
+                            <%= story.story %>
+                        </p>
+                        <ul>
+                            <% if(typeof user != "undefined" && user && user == story.author){ %>
+                            <li>
+                                <a href="/delete-story?id=<%=story._id%>">
+                                    <button class="btn btn-danger" type="button">Delete</button>
+                                </a>
+                            </li>
+                            <% } %>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="clear"></div>
+
+                <!--User Comments-->
+                <div class="comment-form">
+                    <div class="row">
+                        <div class="page-header">
+                            <%
+                                var comments_count = comments.length,
+                                    comment_title = comments_count + " Comment" + (comments_count > 1 ? "s" : "");
+                            %>
+                            <h4><%=comment_title%></h4>
+                        </div>
+                    </div><!-- /row -->
+                    <%
+                        for (var i = 0; i < comments_count; i++){
+                            formatted_date = comments[i].updated;
+                            formatted_date = formatted_date.toISOString().substring(0, 19);
+                    %>
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <div class="thumbnail">
+                                <img class="img-responsive user-photo" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png">
+                            </div><!-- /thumbnail -->
+                        </div><!-- /col-sm-1 -->
+
+                        <div class="col-sm-10">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <b><%=comments[i].username%></b> <span class="text-muted"> said on <%=formatted_date%></span>
+                                </div>
+                                <div class="panel-body">
+                                    <%=comments[i].comment%>
+                                </div><!-- /panel-body -->
+                            </div><!-- /panel panel-default -->
+                        </div><!-- /col-sm-5 -->
+                    </div><!-- /row -->
+                    <%
+                        }
+                    %>
+                </div><!-- /container -->
+
+                <!--Comment box-->
+                <div class="comment-form">
+                    <div class="page-header">
+                        <h4>Leave a comment</h4>
+                    </div>
+                    <form class="form-horizontal" role="form" method="post" action="/comment">
+                        <!--<div class="form-group">
+                            <label for="name" class="col-sm-2 control-label">Name</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="name" name="name" placeholder="Name..." value="" required>
+                                <label class="alert-danger js_email"></label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email" class="col-sm-2 control-label">Email</label>
+                            <div class="col-sm-10">
+                                <input type="email" class="form-control" id="email" name="email" placeholder="example@domain.com" value="" required>
+                                <label class="alert-danger js_email"></label>
+                            </div>
+                        </div>-->
+                        <div class="form-group">
+                            <label for="message" class="col-sm-2 control-label">Comment</label>
+                            <div class="col-sm-10">
+                                <textarea class="form-control" rows="4" placeholder="Comment..." name="comment" required></textarea>
+                                <label class="alert-danger js_email"></label>
+                            </div>
+                        </div>
+                        <input type="hidden" name="story_title" value="<%=story.title%>">
+                        <div class="form-group">
+                            <div class="col-sm-10 col-sm-offset-2">
+                                <input id="submit" name="submit" type="submit" value="Comment" class="btn btn-primary">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-10 col-sm-offset-2">
+                                <! Will be used to display an alert to the user>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="clear"></div>
+            </div>
+        </div>
+
+        <div class="clear"></div>
+    </div>
+</div>
+
+<div class="clear"></div>
+
+<!--Footer-->
+<% include elements/footer.ejs %>
+
+<!-- End-wrap -->
+
+</body>
+</html>
+

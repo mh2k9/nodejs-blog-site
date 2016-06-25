@@ -1,0 +1,42 @@
+<div class="header">
+    <div class="wrap">
+        <!-- Start-logo-->
+        <div class="logo">
+            <!--<a href="/"><img src="/images/logo.png" title="logo" /></a>-->
+            <a href="/"><div class="logo">LeaveTheMark</div></a>
+        </div>
+
+        <!-- End-Logo-->
+        <!-- Start-Header-nav-->
+
+        <div class="clear"> </div>
+
+        <!-- End-Header-nav-->
+    </div>
+</div>
+<div class="header-nav1">
+    <div class="wrap">
+        <ul>
+            <li class="current"><a href="/">Home</a></li>
+            <li><a href="/contact">Contact</a></li>
+            <% if(typeof (user) != "undefined" && user){ %>
+                <li><a href="/new-story">Create Story</a></li>
+                <li><a href="/logout">Logout(<%=user%>)</a></li>
+            <% } else{ %>
+                <li><a href="/login">Create Story</a></li>
+                <li><a href="/login">Login</a></li>
+            <% } %>
+        </ul>
+
+        <div class="search-bar">
+            <ul>
+                <li><input type="text"></li>
+                <li><input type="submit" value="" /></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- End-Header-->
+    <div class="clear"> </div>
+    <!-- content-gallery-->
+</div>
